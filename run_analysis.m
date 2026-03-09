@@ -99,11 +99,16 @@ end
 %
 % TODO: Implement Mandelbrot set plotting m  and saving function
 function mandelbrot_plot(image_data, filename, title_str)
-% Add title to plot?
+    % Create the output directory for images
+    if ~exist('results/images', 'dir')
+        mkdir('results/images');
+    end
+    filepath = fullfile('results', 'images', filename);
+    % TODO: add comments so it doesnt look like GPT cooked here lol
     img_normalised = mat2gray(double(image_data));
     img_rgb        = ind2rgb(im2uint8(img_normalised), hot(256));
-    imwrite(img_rgb, filename);
-    fprintf('Saved: %s (%dx%d)\n', filename, size(image_data,2), size(image_data,1));
+    imwrite(img_rgb, filepath);
+    fprintf('Saved: %s (%dx%d)\n', filepath, size(image_data,2), size(image_data,1));
 end
 
 %% ========================================================================
